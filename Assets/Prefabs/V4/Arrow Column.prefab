@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63f14d63a4e9e854aa9c487ae696b000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Emptytile: {fileID: -6507110852747735432, guid: d1dcc9d45f95e2442a3a009afb7d7908,
+  emptyTile: {fileID: -6507110852747735432, guid: d1dcc9d45f95e2442a3a009afb7d7908,
     type: 3}
   numberOfCells: 8
   upArrow: {fileID: -648441057157081388, guid: 6c4ad15223e92ae449cb7431c900fbf0, type: 3}

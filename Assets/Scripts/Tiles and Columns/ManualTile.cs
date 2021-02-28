@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class ManualTile : MonoBehaviour
@@ -10,28 +9,31 @@ public class ManualTile : MonoBehaviour
     SpriteFinder[] spriteFinders;
     int columnIndex;
     Score score;
-    ArrowTile ArrowTile;
+    ArrowTile arrowTile;
+
     private void Start()
     {
+        //Set column
         columnIndex = 0;
         SetColumn();
+
+        //Get references
         spriteFinders = FindObjectsOfType<SpriteFinder>();
         score = FindObjectOfType<Score>();
-        ArrowTile = FindObjectOfType<ArrowTile>();
+        arrowTile = FindObjectOfType<ArrowTile>();
      }
     
     private void Update()
      {
         if(score.GetTotalScore() == 0)
         {
-        foreach (SpriteFinder spriteFinder in spriteFinders)   //Check a way to move that code from Update
-        {
-            spriteFinder.SetScore();
-            
+            foreach (SpriteFinder spriteFinder in spriteFinders)   //Check a way to move that code from Update
+            {
+                spriteFinder.SetScore();
+            }
         }
-       
-        }
-         score.SetTotalScore();  
+
+        score.SetTotalScore();  
     }
 
     private void SetColumn()
@@ -44,8 +46,7 @@ public class ManualTile : MonoBehaviour
         else
         {
             columnIndex++;
-            SetColumn();
-           
+            SetColumn();          
         }
     }
 
@@ -69,6 +70,7 @@ public class ManualTile : MonoBehaviour
                 }
             }
       }
+
         foreach (SpriteFinder spriteFinder in spriteFinders)
         {
             spriteFinder.SetScore();
@@ -79,12 +81,12 @@ public class ManualTile : MonoBehaviour
 
     private void SpritePressed(int tileIndex, int lastIndex)
     {
-        if(score.isLimitedArrows())
+        if(score.LimitedArrowsChecker())
         {
-            if (tiles[lastIndex].transform.childCount == 0 && ArrowTile.GetRemainingArrows() > 0)
+            if (tiles[lastIndex].transform.childCount == 0 && arrowTile.GetRemainingArrows() > 0)
             {
                 IntantiateArrow(tileIndex, lastIndex);
-                ArrowTile.DecreaseArrow();
+                arrowTile.DecreaseArrow();
 
             }
         }
@@ -112,9 +114,9 @@ public class ManualTile : MonoBehaviour
 
     private void ArrowPressed(int tileIndex, int lastIndex)
     {
-        if(score.isLimitedArrows())
+        if(score.LimitedArrowsChecker())
         {
-            ArrowTile.IncreaseArrow();
+            arrowTile.IncreaseArrow();
         }    
             transform.GetChild(0).GetComponent<UpArrowScript>().DestroyArrow();
             

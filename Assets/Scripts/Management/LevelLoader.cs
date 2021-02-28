@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,6 +12,8 @@ public class LevelLoader : MonoBehaviour
     {
         timeToLoad = 4;
         activeScene = SceneManager.GetActiveScene().buildIndex;
+
+        //Ensure not to play the open transition in the main menu
         if(activeScene > 1)
         {
             animator.Play("Open");
@@ -21,10 +22,15 @@ public class LevelLoader : MonoBehaviour
 
     void Update()
     {
-        timeToLoad -= Time.deltaTime;
-        if(timeToLoad <= 0 && activeScene == 0)
+        //Load the main menu after splash screen timer runs out
+        if(activeScene == 0)
         {
-            SceneManager.LoadScene(activeScene + 1);
+            timeToLoad -= Time.deltaTime;
+
+            if(timeToLoad <= 0 && activeScene == 0)
+            {
+                SceneManager.LoadScene(activeScene + 1);
+            }
         }
     }
 

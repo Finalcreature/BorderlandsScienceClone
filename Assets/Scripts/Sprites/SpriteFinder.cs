@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class SpriteFinder : MonoBehaviour
@@ -8,8 +7,7 @@ public class SpriteFinder : MonoBehaviour
      SpriteScript[] sprites;
      SpriteFinder twinFinder;
      SpriteFinder[] spriteFinders;
-   
-    // Start is called before the first frame update
+
     void Start()
     {
         spriteFinders = FindObjectsOfType<SpriteFinder>();
@@ -22,9 +20,8 @@ public class SpriteFinder : MonoBehaviour
                 twinFinder = spriteFinders[i];
             }
         }     
-       
     }
-    // Update is called once per frame
+ 
     void Update()
     {   
        sprites = FindObjectsOfType<SpriteScript>();  
@@ -32,50 +29,45 @@ public class SpriteFinder : MonoBehaviour
 
     public void SetScore()
     {
-        
-
         List<SpriteScript> spriteScript = new List<SpriteScript>();
         
         foreach(SpriteScript sprite in sprites)
         {
-            if(!twinFinder)
-        {
-           if(sprite.transform.position.y == transform.position.y)
-           { 
-                if( sprite.GetComponent<SpriteRenderer>().sprite.name ==  GetComponent<SpriteRenderer>().sprite.name)
-                {
-                    spriteScript.Add(sprite);
-                    sprite.GetComponent<SpriteRenderer>().color = Color.white;
-                }
-                else
-                {
-                    sprite.GetComponent<SpriteRenderer>().color = Color.gray;
-                }  
-           }      
-        }
+           if(!twinFinder)
+           {
+               if(sprite.transform.position.y == transform.position.y)
+               { 
+                    if( sprite.GetComponent<SpriteRenderer>().sprite.name ==  GetComponent<SpriteRenderer>().sprite.name)
+                    {
+                        spriteScript.Add(sprite);
+                        sprite.GetComponent<SpriteRenderer>().color = Color.white;
+                    }
+                    else
+                    {
+                        sprite.GetComponent<SpriteRenderer>().color = Color.gray;
+                    }  
+               }      
+           }
+
         else
         {
            
             if(sprite.transform.position.y == transform.position.y && sprite.GetComponent<SpriteRenderer>().sprite.name ==  GetComponent<SpriteRenderer>().sprite.name)
             {
                 spriteScript.Add(sprite);
-                sprite.GetComponent<SpriteRenderer>().color = Color.white;
-                
+                sprite.GetComponent<SpriteRenderer>().color = Color.white;    
             }
             else if(sprite.transform.position.y == twinFinder.transform.position.y && sprite.GetComponent<SpriteRenderer>().sprite.name ==  twinFinder.GetComponent<SpriteRenderer>().sprite.name)
             {
-            
                 sprite.GetComponent<SpriteRenderer>().color = Color.white;
-                
             }
-         
             else if(sprite.transform.position.y == transform.position.y)
             {
                  sprite.GetComponent<SpriteRenderer>().color = Color.gray;
             }
         }    
 
-         score = spriteScript.Count;   
+        score = spriteScript.Count;      
         }
     }
 
