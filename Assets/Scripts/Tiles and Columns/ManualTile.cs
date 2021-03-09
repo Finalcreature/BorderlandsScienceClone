@@ -36,6 +36,7 @@ public class ManualTile : MonoBehaviour
         score.SetTotalScore();  
     }
 
+    //Checking each list of tiles if they are in the same position as the column, aka in the column itself
     private void SetColumn()
     {
         columnScript = FindObjectsOfType<ManualColumn>();
@@ -71,6 +72,7 @@ public class ManualTile : MonoBehaviour
             }
       }
 
+        //Update score
         foreach (SpriteFinder spriteFinder in spriteFinders)
         {
             spriteFinder.SetScore();
@@ -83,17 +85,17 @@ public class ManualTile : MonoBehaviour
     {
         if(score.LimitedArrowsChecker())
         {
-            if (tiles[lastIndex].transform.childCount == 0 && arrowTile.GetRemainingArrows() > 0)
+            if (tiles[lastIndex].transform.childCount == 0 && arrowTile.GetRemainingArrows() > 0) //Ensure arrows remaining and top tile is empty
             {
                 IntantiateArrow(tileIndex, lastIndex);
                 arrowTile.DecreaseArrow();
 
             }
         }
-        else if (tiles[lastIndex].transform.childCount == 0)
-            {
+        else if (tiles[lastIndex].transform.childCount == 0) //Ensure top tile is empty
+        {
               IntantiateArrow(tileIndex, lastIndex);
-            }     
+        }     
     }
 
     private void IntantiateArrow(int tileIndex, int lastIndex)
@@ -118,15 +120,16 @@ public class ManualTile : MonoBehaviour
         {
             arrowTile.IncreaseArrow();
         }    
-            transform.GetChild(0).GetComponent<UpArrowScript>().DestroyArrow();
+        
+        transform.GetChild(0).GetComponent<UpArrowScript>().DestroyArrow();
             
-            for (int i = lastIndex; i > tileIndex; i--)
+        for (int i = lastIndex; i > tileIndex; i--)
+        {
+            if (tiles[i].transform.childCount != 0)
             {
-                if (tiles[i].transform.childCount != 0)
-                {
-                    tiles[i].transform.GetChild(0).position -= new Vector3(0, 1);
-                    tiles[i].transform.GetChild(0).transform.parent = tiles[i - 1].transform;
-                }
+                tiles[i].transform.GetChild(0).position -= new Vector3(0, 1);
+                tiles[i].transform.GetChild(0).transform.parent = tiles[i - 1].transform;
             }
+        }
     }
 }
