@@ -4,9 +4,9 @@ using UnityEngine;
 public class SpriteFinder : MonoBehaviour
 {
     public int score;
-     SpriteScript[] sprites;
-     SpriteFinder twinFinder;
-     SpriteFinder[] spriteFinders;
+    SpriteScript[] sprites;
+    SpriteFinder twinFinder;
+    SpriteFinder[] spriteFinders;
 
     void Start()
     {
@@ -14,17 +14,17 @@ public class SpriteFinder : MonoBehaviour
         score = 0;
 
         for (int i = 0; i < spriteFinders.Length; i++)
-        {   
-            if(spriteFinders[i].transform.position.y == transform.position.y && name != spriteFinders[i].name)
+        {
+            if (spriteFinders[i].transform.position.y == transform.position.y && name != spriteFinders[i].name)
             {
                 twinFinder = spriteFinders[i];
             }
-        }     
+        }
     }
- 
-    void Update()
-    {   
-       sprites = FindObjectsOfType<SpriteScript>();  
+
+    public void FindAllSprites()
+    {
+        sprites = FindObjectsOfType<SpriteScript>();
     }
 
     public void SetScore()
@@ -66,8 +66,7 @@ public class SpriteFinder : MonoBehaviour
                  sprite.GetComponent<SpriteRenderer>().color = Color.gray;
             }
         }    
-
-        score = spriteScript.Count;      
+            score = spriteScript.Count;      
         }
     }
 

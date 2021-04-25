@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6220571214476041128}
   - component: {fileID: -118270399841229021}
   m_Layer: 0
-  m_Name: V4Tile
+  m_Name: SpriteTIle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

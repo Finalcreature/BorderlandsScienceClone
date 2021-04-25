@@ -26,14 +26,18 @@ public class ManualColumn : MonoBehaviour
     {
 
       if(spriteInColumn.Count != 0)
-        {
+       {
             for (int spriteIndex = 0; spriteIndex < spriteInColumn.Count; spriteIndex++)
             {
-
                 GameObject sprite = Instantiate(spriteInColumn[spriteIndex],tiles[spriteIndex].transform.position, Quaternion.identity);
                 sprite.transform.parent = tiles[spriteIndex].transform;           
             }
        }
+
+      foreach(SpriteFinder spriteFinder in FindObjectsOfType<SpriteFinder>())
+        {
+            spriteFinder.FindAllSprites();
+        }
     }     
     public List<ManualTile> GetTileScript()
     {
